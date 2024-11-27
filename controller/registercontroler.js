@@ -1,12 +1,10 @@
 const Register = require("../modal/registermodal");
 const createError = require("http-errors");
 
-
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 // const myPlaintextPassword = 's0/\/\P4$$w0rD';
 // const someOtherPlaintextPassword = 'not_bacon';
-
 
 // const getAlluserList = async (req, res, next) => {
 //   try {
@@ -14,7 +12,7 @@ const saltRounds = 10;
 //     if (!allData || allData.length === 0) {
 //       return next(createError(404, "user not found"));
 //     }
-    
+
 //     console.log("data", allData);
 //     res.status(200).json({message : "data fetched successfully" , data : allData , totalCount : allData.length})
 //   } catch (err) {
@@ -25,9 +23,7 @@ const saltRounds = 10;
 // with pagination setup
 const getAlluserList = async (req, res, next) => {
   const no_of_docs_each_page = parseInt(req.query?.count) || 2; // Default: 2 documents per page
-  const current_page_number = parseInt(req.query?.page) || 1;  // Default: Page 1
-   
-
+  const current_page_number = parseInt(req.query?.page) || 1; // Default: Page 1
 
   try {
     // Get the total count of documents
@@ -69,6 +65,12 @@ const createUserList = async (req, res, next) => {
 
     // Encrypt password using bcrypt
     const encryptedPassword = await bcrypt.hash(password, saltRounds);
+
+    //     Technique 2 (auto-gen a salt and hash):
+
+    // bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    //     // Store hash in your password DB.
+    // });  handle with the error
 
     // Create a new user with hashed password
     const newUser = new Register({
@@ -148,10 +150,7 @@ module.exports = {
   deleteSpecificUserList,
 };
 
-
-
-
-/////  optimized way 
+/////  optimized way
 
 // const Register = require("../modal/registermodal");
 // const createError = require("http-errors");

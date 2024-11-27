@@ -10,6 +10,8 @@ app.use(express.json());
 const connectdb = require('./db/db')
 connectdb();
 
+
+
 app.use('/register', registerRoute);
 
 app.use('/login',loginRoutes);
@@ -37,7 +39,7 @@ app.use((err, req, res, next) => {
     });
 });
 
- 
+
 
   // mongoose.connect('mongodb://localhost:27017/entireCrud')
   // .then(() => console.log('Connected! db successfully'))
@@ -48,3 +50,4 @@ app.use((err, req, res, next) => {
 app.listen(port || 4000 , ()=> {
     console.log("app listen is running successfully");
 })
+
